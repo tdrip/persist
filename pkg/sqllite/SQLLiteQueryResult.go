@@ -4,7 +4,7 @@ import (
 	//"database/sql"
 
 	_ "github.com/mattn/go-sqlite3"
-	per "gitlab.venafi.com/dave.brancato/mariachi/backend/persist/pkg/interfaces"
+	per "github.com/tdrip/persist/pkg/interfaces"
 )
 
 type SQLLiteQueryResult struct {
