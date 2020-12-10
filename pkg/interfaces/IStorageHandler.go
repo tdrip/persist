@@ -13,7 +13,7 @@ type IStorageHandler interface {
 
 	// This might be over kill
 	// Maybe all reading/writing should be handled by implementation not here
-	
+
 	// Wipe all data
 	//Wipe() IQueryResult
 	//ReadAll() IQueryResult

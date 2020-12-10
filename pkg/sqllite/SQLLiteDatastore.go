@@ -4,33 +4,32 @@ import (
 	"database/sql"
 
 	_ "github.com/mattn/go-sqlite3"
-	sli "github.com/tdrip/logger/pkg/interfaces"
+	sl "github.com/tdrip/logger/pkg"
 	per "github.com/tdrip/persist/pkg/interfaces"
 )
 
 type SQLLiteDatastore struct {
+	sl.AppLogger
+
 	per.IPersistantStorage
 
 	database *sql.DB
 
 	Filename string
 
-	Log sli.ISimpleLogger
-
 	StorageHandlers map[string]per.IStorageHandler
 }
 
-func CreateSQLLiteDatastore(log sli.ISimpleLogger, filename string) *SQLLiteDatastore {
+func CreateSQLLiteDatastore(filename string) *SQLLiteDatastore {
 	sqlds := SQLLiteDatastore{}
 	sqlds.Filename = filename
-	sqlds.Log = log
 	StorageHandlers := make(map[string]per.IStorageHandler)
 	sqlds.StorageHandlers = StorageHandlers
 	return &sqlds
 }
 
-func CreateOpenSQLLiteDatastore(log sli.ISimpleLogger, filename string) *SQLLiteDatastore {
-	sqlds := CreateSQLLiteDatastore(log, filename)
+func CreateOpenSQLLiteDatastore(filename string) *SQLLiteDatastore {
+	sqlds := CreateSQLLiteDatastore(filename)
 	sqlds.Open()
 	return sqlds
 }
@@ -64,15 +63,6 @@ func (sqlds *SQLLiteDatastore) RemoveStorageHandler(name string) bool {
 
 func (sqlds *SQLLiteDatastore) GetAllStorageHandlers() map[string]per.IStorageHandler {
 	return sqlds.StorageHandlers
-}
-
-// Get/Set the logging for the interface
-func (sqlds *SQLLiteDatastore) GetLog() sli.ISimpleLogger {
-	return sqlds.Log
-}
-
-func (sqlds *SQLLiteDatastore) SetLog(logger sli.ISimpleLogger) {
-	sqlds.Log = logger
 }
 
 func (sqlds *SQLLiteDatastore) GetDatabase() *sql.DB {
