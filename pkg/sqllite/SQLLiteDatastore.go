@@ -48,9 +48,9 @@ func (sqlds *SQLLiteDatastore) GetStorageHandler(name string) (per.IStorageHandl
 }
 
 func (sqlds *SQLLiteDatastore) SetStorageHander(name string, handler per.IStorageHandler) {
-	sqlds.Log.LogDebugf("SetStorageHander", "Setting %s, %v", name, handler)
+	sqlds.LogDebugf("SetStorageHander", "Setting %s, %v", name, handler)
 	sqlds.StorageHandlers[name] = handler
-	sqlds.Log.LogDebugf("SetStorageHander", "Handlers = %v", name, sqlds.StorageHandlers)
+	sqlds.LogDebugf("SetStorageHander", "Handlers = %v", name, sqlds.StorageHandlers)
 }
 
 func (sqlds *SQLLiteDatastore) RemoveStorageHandler(name string) bool {
@@ -73,7 +73,7 @@ func (sqlds *SQLLiteDatastore) CreateStructures() per.IQueryResult {
 
 	success := NewEmptySucceedSQLLiteQueryResult()
 	for key, element := range sqlds.StorageHandlers {
-		sqlds.Log.LogDebugf("CreateStructures", "Handling %s, %v", key, element)
+		sqlds.LogDebugf("CreateStructures", "Handling %s, %v", key, element)
 		res := element.CreateStructures()
 		if !res.QuerySucceeded() {
 			success = NewEmptyFailedSQLLiteQueryResult()
