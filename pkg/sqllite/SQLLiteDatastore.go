@@ -49,7 +49,7 @@ func (sqlds *SQLLiteDatastore) GetStorageHandler(name string) (per.IStorageHandl
 }
 
 func (sqlds *SQLLiteDatastore) SetStorageHander(name string, handler per.IStorageHandler) {
-	sqlds.Log.LogDebugf("SetStorageHander", "Setting %s, %v", name, handler
+	sqlds.Log.LogDebugf("SetStorageHander", "Setting %s, %v", name, handler)
 	sqlds.StorageHandlers[name] = handler
 	sqlds.Log.LogDebugf("SetStorageHander", "Handlers = %v", name, sqlds.StorageHandlers)
 }
