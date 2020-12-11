@@ -36,7 +36,11 @@ func CreateOpenSQLLiteDatastore(filename string) *SQLLiteDatastore {
 
 func (sqlds *SQLLiteDatastore) Open() {
 	// further checks to be added here like checking filepath is correct etc
-	sqlds.database, _ = sql.Open("sqlite3", sqlds.Filename)
+	dp, err := sql.Open("sqlite3", sqlds.Filename)
+	if err != nil {
+		panic(err)
+	}
+	sqlds.database = dp
 }
 
 // Storage Handlers
